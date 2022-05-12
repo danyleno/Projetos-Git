@@ -48,7 +48,7 @@ header p {
   font-size: 1.2em;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.267);
   max-width: 550px;
-  padding: 0 10px 20px 0;
+  padding: 0 10px 40px 10px;
   margin: auto;
 }
 nav {
