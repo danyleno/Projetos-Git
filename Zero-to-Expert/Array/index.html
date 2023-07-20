@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const calcAge = function(birthYear){
+            return 2023 - birthYear
+        }
+        const years = [1999, 1950, 1964, 2005, 1980]
+        const age1 = calcAge(years[0])
+        const age2 = calcAge(years[1])
+        const age3 = calcAge(years[years.length - 1])
+        const ages = [calcAge(years[0]), calcAge(years[1]), calcAge(years[years.length - 1])]
+        console.log(age1, age2, age3, ages)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
