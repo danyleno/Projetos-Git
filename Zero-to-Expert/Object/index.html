@@ -5,12 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        const daniel = {
+        /*const daniel = {
             firstName: 'Daniel',
             lastName: 'Botelho Souza',
-            age: 2023 - 1999,
-            friends: ['Kleybe', 'Peter', 'Edward']
+            birthYear: 1999,
+            job: 'coder',
+            friends: ['Kleybe', 'Peter', 'Edward'],
+            hasDriverLicense: true 
         }
+        const nameKey = 'Name'
+        console.log(daniel['first' + nameKey], daniel['last' + nameKey])
+        const interestedIn = prompt('What do you whant to know about Daniel?')
+        daniel.location = 'Joaíma'
+        daniel ['Instagram'] = '@danielbotelho'
+        if(daniel[interestedIn]){
+            console.log(daniel[interestedIn])
+        }else{
+            console.log('Wrong request!')
+        }
+        console.log(`${daniel.firstName} has ${daniel.friends.length} friends, and his best friend is called ${daniel.friends[0]}`)*/
+    const daniel = {
+            firstName: 'Daniel',
+            lastName: 'Botelho Souza',
+            birthYear: 1999,
+            job: 'coder',
+            friends: ['Kleybe', 'Peter', 'Edward'],
+            hasDriverLicense: false,
+            /*calcAge: function(birthYear){
+                return 2023 - birthYear
+            }*/
+            
+            /*calcAge: function(){
+                return 2023 - this.birthYear
+            }*/
+
+            calcAge: function(){
+                this.age = 2023 - this.birthYear
+                return this.age
+            },
+            danielInfo: function(){ 
+                return `${this.firstName} is a ${this.calcAge()}-years old ${this.job}, and he has ${this.hasDriverLicense ? 'a' : 'no'} drivers license`
+            }
+        }
+        console.log(daniel.danielInfo())
+        daniel.calcAge()
+        console.log(daniel.age)
     </script>
 </head>
 <body>
