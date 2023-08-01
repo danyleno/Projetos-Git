@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        "use strict"
+
+        /*for(let rep = 1; rep <= 10; rep++){
+            console.log(`Lifting weight ${rep} times`)
+        }*/
+        /*const danielArray = [
+            'Daniel',
+            'Botelho Souza',
+            2023 - 1999,
+            'coder',
+            ['Kleybe', 'Peter', 'Edward']
+        ];
+        const types = [];
+
+        for(let rep = 0; rep < danielArray.length ; rep++){
+            console.log(danielArray[rep])
+            types[rep] = typeof danielArray[rep]   
+        }
+        console.log(types)*/
+        
+        /*const years = [1991, 2007, 1983, 2011];
+        const ages =[];
+        for(let i = 0; i < years.length; i++){
+            ages.push(2023 - years[i])
+        }
+        console.log(ages)*/
+
+        const danielArray = [
+            'Daniel',
+            'Botelho Souza',
+            2023 - 1999,
+            'coder',
+            ['Kleybe', 'Peter', 'Edward'],
+            true
+        ];
+        //continue
+        for(let i = 0; i < danielArray.length; i++){
+            if(typeof danielArray[i] !== 'string') continue;
+            console.log(danielArray[i]) 
+        }
+        //break
+        for(let i = 0; i < danielArray.length; i++){
+            if(typeof danielArray[i] === 'number') break;
+            console.log(danielArray[i]) 
+        }
+         
+        // loop de trás para frente
+        for(let i = danielArray.length - 1; i >= 0; i--){
+            console.log(danielArray[i])
+        }
+
+        //um loop dentro de outro
+        for(let exercise = 1; exercise < 4; exercise++){
+            console.log(`Starting exercise ${exercise}`)
+            for(let rep = 1; rep <6; rep++){
+                console.log(`repetition ${rep}`)
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
