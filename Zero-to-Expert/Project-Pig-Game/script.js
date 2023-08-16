@@ -13,7 +13,7 @@ const current1 = document.getElementById('current--1')
 const scores = [0, 0]
 let currentP1 = 0
 let currentP2 = 0
-let activePlayer = 1
+let activePlayer = 0
 
 function newGame(){
     changePlayer()
@@ -34,7 +34,7 @@ function checkWinner(){
     }
 }
 function holdValue(){
-    if(activePlayer === 1 && currentP1 > 1){
+    if(activePlayer === 0 && currentP1 > 1){
         scores[0] += currentP1
         changePlayer()
     }else if(currentP2 > 1){
@@ -45,7 +45,7 @@ function holdValue(){
     showCurrent()
 }
 function changePlayer(){
-    activePlayer === 1 ? activePlayer = 2 : activePlayer = 1
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0
     currentP1 = 0
     currentP2 = 0
     showCurrent()
@@ -58,17 +58,17 @@ function showCurrent(){
 }
 function rollDice(){
     const diceValue = Math.trunc(Math.random() * 6) + 1 
-    if (diceValue > 1 && activePlayer === 1){
+    diceEl.src = `dice-${diceValue}.png`
+    if (diceValue > 1 && activePlayer === 0){
         currentP1 += diceValue
         showCurrent()
-    }else if(diceValue > 1 && activePlayer === 2){
+    }else if(diceValue > 1 && activePlayer === 1){
         currentP2 += diceValue
         showCurrent()
     }else {
         changePlayer()
     }
     showCurrent()
-    diceEl.src = `dice-${diceValue}.png`
 }
 btnRoll.addEventListener('click', rollDice) 
 btnHold.addEventListener('click', holdValue)
