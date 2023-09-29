@@ -5,40 +5,169 @@ const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 // Data needed for first part of the section
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  order: function(starterIndex, mainIndex){
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+  // ES6 enhanced object literals
+  openingHours,
+
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    address,
+    time = '20:00',
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
   },
-  orderDelivery: function({starterIndex = 1, mainIndex = 0, address, time = '20:00'}){
-    console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`)
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `This is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
   },
-  orderPasta: function(ing1, ing2, ing3){
-    console.log(`This is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`)
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
   },
-  orderPizza: function(mainIngredient, ...otherIngredients){
-    console.log(mainIngredient)
-    console.log(otherIngredients)
-  }
 };
+// Sets
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet);
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+console.log(ordersSet);
+for (const order of ordersSet) console.log(order);
+
+// Example
+const staff = ['Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+// const newStaff = new Set(staff);
+const newStaff = [...new Set(staff)];
+console.log(newStaff);
+console.log(new Set(['Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size);
+console.log(new Set('danielbotelho').size)
+
+/*
+// Property NAMES
+const properties = Object.keys(openingHours)
+console.log(properties)
+let openStr = `We are open on ${properties.length} days: `
+for (const day of properties){
+  openStr += `${day}, `
+}
+console.log(openStr)
+// Property values
+const values = Object.values(openingHours) 
+console.log(values)
+// Entire object
+const entries = Object.entries(openingHours)
+console.log(entries)
+for (const [key, {open, close}] of entries){
+  console.log(`On ${key} we open at ${open} and close at ${close}`)
+}
+// Without optional chaining
+//console.log(restaurant.openingHours.mon.open)
+// With optional chaining 
+console.log(restaurant.openingHours.mon?.open)
+// Example
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'close'
+  console.log(`On ${day} we open at ${open}`)
+}
+// Optional chaining in methods 
+console.log(restaurant.order?.(0, 2) ?? 'Method does not exist')
+console.log(restaurant.orderRisotto?.(0, 1) ?? "Method doesn't exist")
+// Optional chaining in arrays
+const users = [{name: 'Daniel', email: 'hiDaniel@gmail.com'}]
+console.log(users[1]?.name ?? 'this array is empty')
+
+// For-of Loop
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu]
+for (const item of menu) console.log(item)
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i[0] + 1}: ${el}`)
+}
+//Logical Assignment Operators
+const rest1 = {
+  name: "Roby's",
+  numGuests: 0
+}
+const rest2 = {
+  name: "Pit Stop",
+  owner: 'Lucca' 
+}
+// Operador de atribuíção OR
+//rest2.numGuests = rest2.numGuests || 10
+//rest1.numGuests = rest1.numGuests || 10
+// rest1.numGuests ||= 10
+// rest2.numGuests ||= 10
+
+// nullish assignment operator (nulo ou indefinido)
+rest1.numGuests ??= 10
+rest2.numGuests ??= 10
+
+rest1.owner &&= "<ANONYMOUS>"
+rest2.owner &&= "<ANONYMOUS>"
+console.log(rest1, rest2)
+
+/*
+//Short-circuiting ---OR---
+console.log(3 || 'Daniel')
+console.log('', 'Daniel')
+console.log(undefined || 0 || '' || 'Hello' || 23 || null)
+restaurant.numGuests = 0
+const guests1 = restaurant.numGuests? restaurant.numGuests : 10
+const guests2 = restaurant.numGuests || 10
+console.log(guests1, guests2)
+
+//---AND---
+console.log(0 && 'Daniel')
+console.log(7 && 'Daniel')
+console.log(7 && 'Hello' && null && 'Daniel')
+
+//Exemplo prático
+if (restaurant.orderPizza){
+  restaurant.orderPizza('mushrooms', 'spinach')}
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach')
+
+/*
+// Nullish: nulo e indefinido (0 e '' são considerados valores verdadeiros)
+const guestCorrect = restaurant.numGuests ?? 10
+console.log(guestCorrect)
 
 restaurant.orderDelivery({
   time: '22:30',
@@ -112,7 +241,7 @@ const {fri: {open, close},
 } = openingHours;
 console.log(open, close)
 
-/*const [first, , , fourth] = restaurant.categories
+const [first, , , fourth] = restaurant.categories
 console.log(first, fourth)
 
 //Return 2 values from a function
