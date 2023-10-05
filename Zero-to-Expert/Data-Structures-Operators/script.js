@@ -1,5 +1,25 @@
 'use strict';
-
+// Challenge 4
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+let splitedVar = [];
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value
+  splitedVar = text.split('\n');
+  for (const [varNumber, varName] of splitedVar.entries()) {
+    let camelName = []
+    const noSpace = varName.trim().toLowerCase().split('_');
+    for (const [counter, names] of noSpace.entries()) {
+      if(counter === 0){
+        camelName.push(names)
+      } else if(counter >= 1){
+        camelName.push(names[0].toUpperCase() + names.slice(1))
+      }
+    }
+    console.log(camelName.join('').padEnd(25, ' '), '✅'.repeat(varNumber + 1))
+  }
+});
+/*
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
