@@ -4,19 +4,19 @@ document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
 let splitedVar = [];
 document.querySelector('button').addEventListener('click', function () {
-  const text = document.querySelector('textarea').value
+  const text = document.querySelector('textarea').value;
   splitedVar = text.split('\n');
   for (const [varNumber, varName] of splitedVar.entries()) {
-    let camelName = []
+    let camelName = [];
     const noSpace = varName.trim().toLowerCase().split('_');
     for (const [counter, names] of noSpace.entries()) {
-      if(counter === 0){
-        camelName.push(names)
-      } else if(counter >= 1){
-        camelName.push(names[0].toUpperCase() + names.slice(1))
+      if (counter === 0) {
+        camelName.push(names);
+      } else if (counter >= 1) {
+        camelName.push(names[0].toUpperCase() + names.slice(1));
       }
     }
-    console.log(camelName.join('').padEnd(25, ' '), '✅'.repeat(varNumber + 1))
+    console.log(camelName.join('').padEnd(25), '✅'.repeat(varNumber + 1));
   }
 });
 /*
