@@ -61,6 +61,19 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = ''
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal'
+    const html = `<div class="movements__row">
+<div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+<div class="movements__value">${mov}</div>
+</div>`;
+containerMovements.insertAdjacentHTML('afterbegin', html)
+  });
+};
+displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -74,3 +87,47 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+/*
+let arr = ['a', 'b', 'c', 'd', 'e']
+
+// Splice
+arr.splice(1, 1)
+console.log(arr)
+
+// Reverse
+arr = ['a', 'b', 'c', 'd', 'e']
+let arr2 = ['j', 'i', 'h', 'g', 'f']
+console.log(arr2.reverse())
+ 
+// Concat
+const letters = arr.concat(arr2)
+console.log(letters)
+
+// Join
+console.log(letters.join(' - '))
+
+// At
+const arr = [23, 44, 87]
+console.log(arr.at(-1))
+
+// forEach
+for (const move of movements){
+  console.log(`The user ${move > 0? 'deposited' : 'withdrew'} ${move} U$`)
+}
+
+movements.forEach(function(movement, counter){
+  console.log(`${counter + 1} The user ${movement > 0? 'deposited' : 'withdrew'} ${movement} U$`)
+
+})
+
+// forEach on Maps
+currencies.forEach(function(value, key, map){
+  console.log(`${key}: ${value}`)
+})
+
+// forEach on Sets
+const currenciesUnique = new Set(['USD', 'GBP', 'EUR'])
+currenciesUnique.forEach(function(value, key, map){
+  console.log(`${key}: ${value}`)
+
+})*/
