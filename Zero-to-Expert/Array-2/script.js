@@ -74,6 +74,17 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const createUsername = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsername(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -130,13 +141,14 @@ const currenciesUnique = new Set(['USD', 'GBP', 'EUR'])
 currenciesUnique.forEach(function(value, key, map){
   console.log(`${key}: ${value}`)
 
-})*/
-const juliaData = [9, 16, 6, 8, 3]
-const kateData = [10, 5, 6, 1, 4]
+})
+// Dogs Challenge
+const juliaData = [9, 16, 6, 8, 3];
+const kateData = [10, 5, 6, 1, 4];
 
 const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCorrected = dogsJulia.slice(1, 3);
-  const allDogs = [...dogsJuliaCorrected, ...dogsKate];
+  const allDogs = dogsJuliaCorrected.concat(dogsKate)
   allDogs.forEach(function (dogAge, i) {
     const puppyOrAdult =
       dogAge >= 3 ? `an adult, and is ${dogAge} years old` : 'still a puppy 🐶';
@@ -146,3 +158,24 @@ const checkDogs = function (dogsJulia, dogsKate) {
 };
 
 checkDogs(juliaData, kateData);
+
+// Map() Method
+const eurToUsd = 1.1
+const movementsUSD = movements.map(mov => mov * eurToUsd)
+console.log(movementsUSD)
+
+const movementsDescription = movements.map(function(mov, i, arr){
+ return `Movement ${i + 1}: You ${mov > 0? 'deposited' : 'withdrew'} ${mov}`
+})
+console.log(movementsDescription)
+
+// Filter() Method
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+const withdrawals = movements.filter(mov => mov < 0)
+console.log(deposits, withdrawals);
+
+// Reduce() Method
+const balance = movements.reduce((accumulator, current) => accumulator + current, 0);
+console.log(balance);*/
