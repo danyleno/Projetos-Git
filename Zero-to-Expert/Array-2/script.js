@@ -62,14 +62,14 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (movements) {
-  containerMovements.innerHTML = ''
+  containerMovements.innerHTML = '';
   movements.forEach(function (mov, i) {
-    const type = mov > 0 ? 'deposit' : 'withdrawal'
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `<div class="movements__row">
 <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
 <div class="movements__value">${mov}</div>
 </div>`;
-containerMovements.insertAdjacentHTML('afterbegin', html)
+    containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
 displayMovements(account1.movements);
@@ -131,3 +131,18 @@ currenciesUnique.forEach(function(value, key, map){
   console.log(`${key}: ${value}`)
 
 })*/
+const juliaData = [9, 16, 6, 8, 3]
+const kateData = [10, 5, 6, 1, 4]
+
+const checkDogs = function (dogsJulia, dogsKate) {
+  const dogsJuliaCorrected = dogsJulia.slice(1, 3);
+  const allDogs = [...dogsJuliaCorrected, ...dogsKate];
+  allDogs.forEach(function (dogAge, i) {
+    const puppyOrAdult =
+      dogAge >= 3 ? `an adult, and is ${dogAge} years old` : 'still a puppy 🐶';
+    console.log(`Dog number ${i + 1} is ${puppyOrAdult}`);
+  });
+  console.log(allDogs);
+};
+
+checkDogs(juliaData, kateData);
