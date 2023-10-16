@@ -72,10 +72,9 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance}€`;
 };
 
 const calcDisplaySumary = function (acc) {
@@ -108,6 +107,15 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+const updateUI = function (acc) {
+  // Display movements
+  displayMovements(acc.movements);
+  // Display balance
+  calcDisplayBalance(acc);
+  //Display summary
+  calcDisplaySumary(acc);
+};
+
 // Event handler
 let currentAcount;
 btnLogin.addEventListener('click', function (e) {
@@ -121,20 +129,34 @@ btnLogin.addEventListener('click', function (e) {
     // Display UI and welcome message
     labelWelcome.textContent = `Welcome back ${
       currentAcount.owner.split(' ')[0]
-    }`; 
+    }`;
     containerApp.style.opacity = 100;
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
-    inputLoginPin.blur()
-    // Display movements
-    displayMovements(currentAcount.movements);
-    // Display balance
-    calcDisplayBalance(currentAcount.movements);
-    //Display summary
-    calcDisplaySumary(currentAcount);
+    inputLoginPin.blur();
+    updateUI(currentAcount);
   }
 });
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => inputTransferTo.value === acc.username
+  );
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAcount.balance >= amount &&
+    receiverAcc.username !== currentAcount.username
+  ) {
+    currentAcount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    updateUI(currentAcount)
+  }
+  inputTransferAmount.value = inputTransferTo.value = ''
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
