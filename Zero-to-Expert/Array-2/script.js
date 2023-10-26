@@ -66,7 +66,7 @@ const displayMovements = function (movements, sort = false) {
 
   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
-  movements.forEach(function (mov, i) {
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `<div class="movements__row">
 <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
@@ -197,7 +197,7 @@ let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
   displayMovements(currentAcount.movements, !sorted);
-  sorted = !sorted
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -369,4 +369,26 @@ console.log(movements);
 // Descending
 movements.sort((a, b) => b - a);
 console.log(movements);
+
+// fill()
+const x = new Array(7)
+console.log(x)
+x.fill(1)
+console.log(x)
+x.fill(2, 3, 5)
+console.log(x)
+
+// Array.from()
+const y = Array.from({length: 7}, () => 1)
+console.log(y)
+const z = Array.from({length: 7}, (cur, i) => i + 1)
+console.log(z)
 */
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI)
+});
